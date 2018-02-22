@@ -17,12 +17,13 @@ IF(UNIX)
 
   MESSAGE(STATUS "Searching for g2o ...")
 
-  FIND_PATH(G2O_INCLUDE_DIR
+  FIND_PATH(G2O_INCLUDE_DIR g2o/core/base_vertex.h
     NAMES core math_groups types  
     PATHS
     /usr/local
     /usr
     PATH_SUFFIXES include/g2o include
+    NO_DEFAULT_PATH
   )
   IF (G2O_INCLUDE_DIR)
     MESSAGE(STATUS "Found g2o headers in: ${G2O_INCLUDE_DIR}")
@@ -34,6 +35,7 @@ IF(UNIX)
     /usr/local
     /usr
     PATH_SUFFIXES lib
+    NO_DEFAULT_PATH
   )
   FIND_LIBRARY(G2O_CLI_LIBRARIES 
     NAMES g2o_cli 
@@ -41,6 +43,7 @@ IF(UNIX)
     /usr/local
     /usr
     PATH_SUFFIXES lib
+    NO_DEFAULT_PATH
   )
 
   FIND_LIBRARY(G2O_SLAM2D_LIBRARIES 
@@ -49,6 +52,7 @@ IF(UNIX)
     /usr/local
     /usr
     PATH_SUFFIXES lib
+    NO_DEFAULT_PATH
   )
   
   FIND_LIBRARY(G2O_SLAM3D_LIBRARIES 
@@ -57,6 +61,7 @@ IF(UNIX)
     /usr/local
     /usr
     PATH_SUFFIXES lib
+    NO_DEFAULT_PATH
   )
   
   FIND_LIBRARY(G2O_CSPARSE_EXTENSION
@@ -65,6 +70,7 @@ IF(UNIX)
     /usr/local
     /usr
     PATH_SUFFIXES lib
+    NO_DEFAULT_PATH
   )
 
   FIND_LIBRARY(G2O_STUFF
@@ -73,6 +79,7 @@ IF(UNIX)
     /usr/local
     /usr
     PATH_SUFFIXES lib
+    NO_DEFAULT_PATH
   )
 
   SET(G2O_LIBRARIES ${G2O_CORE_LIBRARIES} ${G2O_CLI_LIBRARIES}

@@ -9,6 +9,7 @@ find_package(G2O)
 find_package(Eigen3)
 find_package(SuiteSparse)
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 SET(CMAKE_BUILD_TYPE Release)
 if("${CMAKE_BUILD_TYPE}" STREQUAL "")
   set(CMAKE_BUILD_TYPE Release)

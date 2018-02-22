@@ -75,10 +75,13 @@ int main(int argc, char** argv)
 
 	g2o::SparseOptimizer optimizer;
 
-	SlamLinearSolver* linearSolver = new SlamLinearSolver();
-	linearSolver->setBlockOrdering(false);
-	SlamBlockSolver* blockSolver = new SlamBlockSolver(linearSolver);
-	g2o::OptimizationAlgorithmGaussNewton* solverGauss   = new g2o::OptimizationAlgorithmGaussNewton(blockSolver);
+	//SlamLinearSolver* linearSolver = new SlamLinearSolver();
+	//linearSolver->setBlockOrdering(false);
+	//SlamBlockSolver* blockSolver = new SlamBlockSolver(linearSolver);
+	//g2o::OptimizationAlgorithmGaussNewton* solverGauss   = new g2o::OptimizationAlgorithmGaussNewton(blockSolver);
+  	auto linearSolver = g2o::make_unique<SlamLinearSolver>();
+  	linearSolver->setBlockOrdering(false);
+  	g2o::OptimizationAlgorithmGaussNewton* solverGauss   = new g2o::OptimizationAlgorithmGaussNewton(g2o::make_unique<SlamBlockSolver>(std::move(linearSolver)));
 
 	optimizer.setAlgorithm(solverGauss);
 

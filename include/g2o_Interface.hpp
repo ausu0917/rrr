@@ -159,10 +159,12 @@ public:
 			return false;
 		}
 		optimizer = new g2o::SparseOptimizer;
-		SlamLinearSolver* linearSolver = new SlamLinearSolver();
+		//SlamLinearSolver* linearSolver = new SlamLinearSolver();
+		auto linearSolver = g2o::make_unique<SlamLinearSolver>();
 		linearSolver->setBlockOrdering(false);
-		SlamBlockSolver* blockSolver = new SlamBlockSolver(linearSolver);
-		g2o::OptimizationAlgorithmGaussNewton* solverGauss   = new g2o::OptimizationAlgorithmGaussNewton(blockSolver);
+		//SlamBlockSolver* blockSolver = new SlamBlockSolver(linearSolver);
+		//g2o::OptimizationAlgorithmGaussNewton* solverGauss   = new g2o::OptimizationAlgorithmGaussNewton(blockSolver);
+	    g2o::OptimizationAlgorithmGaussNewton* solverGauss   = new g2o::OptimizationAlgorithmGaussNewton(g2o::make_unique<SlamBlockSolver>(std::move(linearSolver)));
 		optimizer->setAlgorithm(solverGauss);
 
 
